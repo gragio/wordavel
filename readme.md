@@ -1,4 +1,4 @@
-# Laravel 5.3 ready for WordPress
+# Wordavel
 
 Laravel PHP Framework with [Corcel](https://github.com/corcel/corcel) and [ACF](https://github.com/corcel/acf) plugin.
 Configured and ready for WordPress use.
