@@ -11,12 +11,12 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
 ## Official Documentation
-1. After git clone run
+- After git clone run
 ```
 $ composer install
 ```
-2. Download [WordPress](Download WordPress 4.6.1) and copy WP files in a directory outside of THIS project directory.
-3. Set your Homestead.yaml file and define your virtual hosts. For example:
+- Download [WordPress](Download WordPress 4.6.1) and copy WP files in a directory outside of THIS project directory.
+- Set your Homestead.yaml file and define your virtual hosts. For example:
 ```
 folders:
     - map: "/Users/username/Dev/wordavel"
@@ -31,12 +31,13 @@ sites:
       to: "/home/vagrant/wp"
 ```
 
-4. Run $ vagrant up
-5. Set $bootstrapFilePath in app/Providers/WordPressServiceProvider.php
+- Run $ vagrant up
+- Set $bootstrapFilePath in app/Providers/WordPressServiceProvider.php
 ```
 protected $bootstrapFilePath = __DIR__.'/../../../wp/wp-load.php';
 ```
-6. Install WordPress from dedicated virtual host. http://admin.wordavel.dev in this case.
+- Install WordPress from dedicated virtual host. http://admin.wordavel.dev in this case.
+- Test http://wordavel.dev/testme
 
 Documentation for the Laravel framework can be found on the [Laravel website](http://laravel.com/docs).
 
