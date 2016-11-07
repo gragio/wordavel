@@ -37,7 +37,7 @@ sites:
 protected $bootstrapFilePath = __DIR__.'/../../../wp/wp-load.php';
 ```
 - Install WordPress from dedicated virtual host. http://admin.wordavel.dev in this case.
-- Test http://wordavel.dev/testme
+- Try your test page /testme. http://wordavel.dev/testme in this case.
 
 Documentation for the Laravel framework can be found on the [Laravel website](http://laravel.com/docs).
 
