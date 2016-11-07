@@ -12,7 +12,31 @@ Laravel is accessible, yet powerful, providing tools needed for large, robust ap
 
 ## Official Documentation
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+1. Download Wordpress
+2. Copy WP files in a directory outside of THIS project directory.
+3. Set your Homestead.yaml file. For example:
+'''
+folders:
+    - map: "/Users/username/Dev/wordavel"
+      to: "/home/vagrant/wordavel"
+    - map: "/Users/username/Dev/wordpress"
+      to: "/home/vagrant/wp"
+
+sites:
+    - map: wordavel.dev
+      to: "/home/vagrant/wordavel/public"
+    - map: admin.wordavel.dev
+      to: "/home/vagrant/wp"
+'''
+
+4. Run vagrant up
+5. Set $bootstrapFilePath in app/Providers/WordPressServiceProvider.php
+'''
+protected $bootstrapFilePath = __DIR__.'/../../../wp/wp-load.php';
+'''
+
+
+Documentation for the Laravel framework can be found on the [Laravel website](http://laravel.com/docs).
 
 ## Contributing
 
