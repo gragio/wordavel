@@ -31,7 +31,8 @@ sites:
       to: "/home/vagrant/wp"
 ```
 
-- Run $ vagrant up
+- Run vagrant up
+- Check your hosts file and add second virtual host for WP admin side.
 - Set $bootstrapFilePath in app/Providers/WordPressServiceProvider.php
 ```
 protected $bootstrapFilePath = __DIR__.'/../../../wp/wp-load.php';
