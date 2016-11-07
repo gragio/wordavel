@@ -68,10 +68,10 @@ return [
 
         'wordpress' => [ // this is your Corcel database connection, where WordPress tables are
             'driver'    => 'mysql',
-            'host' => env('WPDB_HOST', 'localhost'),
-            'database' => env('WPDB_DATABASE', 'forge'),
-            'username' => env('WPDB_USERNAME', 'forge'),
-            'password' => env('WPDB_PASSWORD', ''),
+            'host'      => env('WPDB_HOST', 'localhost'),
+            'database'  => env('WPDB_DATABASE', 'forge'),
+            'username'  => env('WPDB_USERNAME', 'forge'),
+            'password'  => env('WPDB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => 'wp_',
