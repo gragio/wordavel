@@ -1,6 +1,6 @@
 # Wordavel
 
-Laravel PHP Framework with [Corcel](https://github.com/corcel/corcel) and [ACF](https://github.com/corcel/acf) plugin.
+Laravel PHP Framework v5.3 with [Corcel](https://github.com/corcel/corcel) and [ACF](https://github.com/corcel/acf) plugin.
 Configured and ready for WordPress use.
 
 ## Install
@@ -35,3 +35,6 @@ protected $bootstrapFilePath = __DIR__.'/../../../wp/wp-load.php';
 ```
 - Install WordPress from dedicated virtual host. http://admin.wordavel.dev in this case.
 - Try your test page /testme. http://wordavel.dev/testme in this case.
+
+## Authors
+- [Giorgio Grasso](http://giorgiograsso.com)
