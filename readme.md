@@ -15,7 +15,7 @@ Laravel is accessible, yet powerful, providing tools needed for large, robust ap
 ```
 $ composer install
 ```
-- Download [WordPress](Download WordPress 4.6.1) and copy WP files in a directory outside of THIS project directory.
+- Download [WordPress](https://wordpress.org/latest.zip) and copy WP files in a directory outside of THIS project directory.
 - Set your Homestead.yaml file and define your virtual hosts. For example:
 ```
 folders:
