@@ -55,7 +55,7 @@
         <!-- /.main -->
 
         <footer>
-            <p align="center">Developer by Alkemy Dev</p>
+            <p align="center">Develop by Alkemy Dev</p>
         </footer>
 
         @yield('page-scripts')
