@@ -11,14 +11,11 @@ use App\Post;
 
 class PageController extends Controller
 {
-	//public $menu = get_posts('page');
-
-    public function page( $page = 'index' ){
+    public function page($page = 'index')
+    {
 		$menu = Post::type('page')->published()->get();
-        $content = null;
+        $content = ($page != 'index') ? Post::slug($page)->first() : get_posts();
 
-    	if($index != 'index')
-            $content = Post::slug($page)->first();
 
         $viewData = [
     		'slug' => $page,
