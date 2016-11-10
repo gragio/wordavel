@@ -15,22 +15,23 @@ class PageController extends Controller
 
     public function page( $page = 'index' ){
 		$menu = Post::type('page')->published()->get();
+        $content = null;
 
-		$slugs = [];
+    	if($index != 'index')
+            $content = Post::slug($page)->first();
 
-		for($i=0; $i<count($menu); $i++)
-			$slugs[] = $menu[$i]->slug;
-
-
-    	$viewData = [
-	    	'slug' => $page,
-	    	'menu' => $menu
-	    ];
-
+        $viewData = [
+    		'slug' => $page,
+    		'menu' => $menu,
+            'content' => $content
+    	];
 
     	if (View::exists('pages.'.$page))
-			return view('pages.'.$page , $viewData );
-    	else return view('pages.404', $viewData );
+			return view('pages.'.$page , $viewData);
+        else if (!empty($content))
+            return view('pages.post_page', $viewData);
+    	else return view('pages.404', $viewData);
 
     }
+
 }
