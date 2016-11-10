@@ -11,11 +11,12 @@ use App\Post;
 
 class PageController extends Controller
 {
+
+
     public function page($page = 'index')
     {
 		$menu = Post::type('page')->published()->get();
         $content = ($page != 'index') ? Post::slug($page)->first() : get_posts();
-
 
         $viewData = [
     		'slug' => $page,
@@ -29,6 +30,21 @@ class PageController extends Controller
             return view('pages.post_page', $viewData);
     	else return view('pages.404', $viewData);
 
+    }
+
+    public function blog($slug) {
+        $menu = Post::type('page')->published()->get();
+        $content = Post::slug($slug)->first();
+
+        $viewData = [
+    		'slug' => $page,
+    		'menu' => $menu,
+            'content' => $content
+    	];
+
+    	if (!empty($content))
+            return view('pages.post', $viewData);
+    	else return view('pages.404', $viewData);
     }
 
 }
