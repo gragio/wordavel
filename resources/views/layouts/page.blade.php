@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        <title>Wordavel</title>
+        <title>Wordavel @if(isset($content)) | {{$content['title']}} @endif</title>
 
         <meta content='width=device-width,initial-scale=1' name='viewport'>
         <meta charset="UTF-8">
@@ -54,11 +54,9 @@
         </div>
         <!-- /.main -->
 
-        <div class="footer">
-
-
-
-        </div>
+        <footer>
+            <p align="center">Developer by Alkemy Dev</p>
+        </footer>
 
         @yield('page-scripts')
 
