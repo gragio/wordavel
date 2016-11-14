@@ -65,6 +65,7 @@
         ]
     },
     "scripts": {
+        "pre-install-cmd": "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
         "post-install-cmd": [
             "php vendor/bin/homestead make",
             "composer wp-content"
