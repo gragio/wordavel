@@ -66,7 +66,7 @@ return [
             'engine' => null,
         ],
 
-        'wordpress' => [ // this is your Corcel database connection, where WordPress tables are
+        'wordpress' => [
             'driver'    => 'mysql',
             'host'      => env('WPDB_HOST', 'localhost'),
             'database'  => env('WPDB_DATABASE', 'forge'),
