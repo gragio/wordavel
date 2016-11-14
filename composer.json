@@ -42,7 +42,7 @@
         "wpackagist-plugin/amazon-web-services": "^1.0",
         "wpackagist-plugin/wordpress-seo": "^3.8",
         "wpackagist-plugin/regenerate-thumbnails": "^2.2",
-        "wpackagist-plugin/advanced-custom-fields-viewer": "^1.2"
+        "advanced-custom-fields/advanced-custom-fields-pro": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -67,8 +67,7 @@
     "scripts": {
         "post-install-cmd": [
             "php vendor/bin/homestead make",
-            "cp -r wp-content wordpress/",
-            "rm -rf wp-content"
+            "composer wp-content"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
@@ -79,7 +78,8 @@
             "php artisan key:generate",
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize"
-        ]
+        ],
+        "wp-content": "cp -r wp-content wordpress/ && rm -rf wp-content"
     },
     "config": {
         "preferred-install": "dist"
