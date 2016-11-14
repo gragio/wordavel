@@ -26,6 +26,8 @@ databases:
 - Run
 ```
 $ vagrant up
+$ vagrant ssh
+$ cd wordavel
 $ composer start
 ```
 - Install WordPress from dedicated virtual host. http://admin.wordavel.dev in this case.
