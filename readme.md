@@ -31,6 +31,10 @@ $ cd wordavel
 $ composer start
 ```
 - Install WordPress from dedicated virtual host. http://admin.wordavel.dev in this case.
+- For share WP authentication add this entry in wp-config.php
+```
+define('COOKIE_DOMAIN', 'wordavel.dev');
+```
 - Try your test page /testme. http://wordavel.dev/testme in this case.
 
 ## Authors

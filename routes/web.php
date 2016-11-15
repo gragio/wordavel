@@ -19,3 +19,4 @@ Route::get('/testme', function () { var_dump(get_posts()); });
 
 Route::get('/{page?}', 'PageController@page');
 Route::get('/blog/{slug?}', 'PageController@blog');
+Route::get('/preview/{ID?}', 'PageController@preview');

@@ -36,7 +36,7 @@
 
                         <li class="menu__item">
 
-                            <a href="{{ $menuItem['slug'] }}" class="menu__item-anchor @if( $slug == $menuItem['slug']) active @endif " data-slug="{{ $menuItem['slug'] }}">
+                            <a href="/{{ $menuItem['slug'] }}" class="menu__item-anchor @if( $slug == $menuItem['slug']) active @endif " data-slug="{{ $menuItem['slug'] }}">
                                 {{ $menuItem['title'] }}
                             </a>
 
