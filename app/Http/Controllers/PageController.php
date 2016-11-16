@@ -25,8 +25,8 @@ class PageController extends Controller
     public function page($page = 'index') {
         $this->setMenu();
 
-        if(!empty($_GET['preview_id']) || !empty($_GET['p']))
-            return $this->getPreview($_GET['preview_id'].$_GET['p']);
+        if(!empty($_GET['preview_id']) || !empty($_GET['page_id']) || !empty($_GET['p']))
+            return $this->getPreview($_GET['preview_id'].$_GET['p'].$_GET['page_id']);
 
         $this->viewData['content'] = ($page != 'index') ? Post::type('page')->slug($page)->first() : get_posts();
 
@@ -59,9 +59,7 @@ class PageController extends Controller
 
     private function getPreview($ID) {
 
-        $user = wp_get_current_user();
-
-        if(!is_user_logged_in() || !array_intersect(['editor', 'administrator', 'author'], $user->roles))
+        if(!is_user_logged_in() && $user = wp_get_current_user() || !array_intersect(['editor', 'administrator', 'author'], $user->roles))
             return view('pages.404', $this->viewData);
 
 
