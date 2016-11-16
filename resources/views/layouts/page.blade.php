@@ -31,18 +31,19 @@
             <div class="container menu__wrapper clearfix t-center">
 
                 <ul class="menu__items">
+                    <li class="menu__item">
+                        <a href="/" class="menu__item-anchor" data-slug="home">
+                            Home
+                        </a>
 
+                    </li>
                     @foreach ( $menu as $menuItem )
-
                         <li class="menu__item">
-
                             <a href="/{{ $menuItem['slug'] }}" class="menu__item-anchor @if( $slug == $menuItem['slug']) active @endif " data-slug="{{ $menuItem['slug'] }}">
                                 {{ $menuItem['title'] }}
                             </a>
-
                         </li>
                         <!-- /.menu__item -->
-
                     @endforeach
 
                 </ul>
