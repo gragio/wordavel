@@ -8,60 +8,59 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Services;
 use App\Post;
+use App\Menu;
 
 class PageController extends Controller
 {
 
-    public function page($page = 'index') {
-		$menu = Post::type('page')->published()->get();
-        $content = ($page != 'index') ? Post::type('page')->slug($page)->first() : get_posts();
+    private $viewData;
 
-        $viewData = [
-    		'menu' => $menu,
-            'content' => $content
-    	];
+    private $blogPage = 'blog';
+
+    private function setMenu($menu = null) {
+        if($menu == null)
+            $this->viewData['menu'] = Post::type('page')->published()->get();
+        else $this->viewData['menu'] = $menu;
+    }
+
+    public function page($page = 'index') {
+        $this->setMenu();
+
+        if(!empty($_GET['preview_id']))
+            return $this->getPreview($_GET['preview_id']);
+
+        $this->viewData['content'] = ($page != 'index' || $page != $blogPage) ? Post::type('page')->slug($page)->first() : get_posts();
 
     	if (View::exists('pages.'.$page))
-			return view('pages.'.$page , $viewData);
-        else if (!empty($content))
-            return view('pages.post_page', $viewData);
-    	else return view('pages.404', $viewData);
+			return view('pages.'.$page , $this->viewData);
+        else if (!empty($this->viewData['content']))
+            return view('pages.post_page', $this->viewData);
+    	else return view('pages.404', $this->viewData);
 
     }
 
     public function blog($slug) {
-        $menu = Post::type('page')->published()->get();
-        $content = Post::slug($slug)->first();
+        $this->setMenu();
 
-        $viewData = [
-    		'menu' => $menu,
-            'content' => $content
-    	];
+        $this->viewData['content'] = Post::type('post')->slug($slug)->first();
 
-    	if (!empty($content))
-            return view('pages.post', $viewData);
-    	else return view('pages.404', $viewData);
+    	if (!empty($this->viewData['content']))
+            return view('pages.post', $this->viewData);
+    	else return view('pages.404', $this->viewData);
     }
 
-    public function preview($ID) {
-        $menu = Post::type('page')->published()->get();
-        $viewData = [
-    		'menu' => $menu
-        ];
+    private function getPreview($ID) {
 
         $user = wp_get_current_user();
 
         if(!is_user_logged_in() || !array_intersect(['editor', 'administrator', 'author'], $user->roles))
-            return view('pages.404', $viewData);
+            return view('pages.404', $this->viewData);
 
 
         $content = Post::where('ID', $ID)->with('revision')->first();
+        $this->viewData['content'] =  $content->revision->last();
 
-        $viewData['content'] =  $content->revision->last();
-
-    	if (!empty($content) && count($content))
-            return view('pages.post_page', $viewData);
-    	else return view('pages.404', $viewData);
+    	return view('pages.post_page', $this->viewData);
     }
 
 }
