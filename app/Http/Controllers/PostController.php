@@ -9,6 +9,6 @@ class PostController extends Controller
 {
     public function index() {
         $post = Post::where('ID', 1)->first();
-        var_dump($post->acf()['titolo']);
+        var_dump($post->acf());
     }
 }
