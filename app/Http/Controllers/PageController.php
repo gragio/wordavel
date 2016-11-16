@@ -25,8 +25,8 @@ class PageController extends Controller
     public function page($page = 'index') {
         $this->setMenu();
 
-        if(!empty($_GET['preview_id']))
-            return $this->getPreview($_GET['preview_id']);
+        if(!empty($_GET['preview_id']) || !empty($_GET['p']))
+            return $this->getPreview($_GET['preview_id'].$_GET['p']);
 
         $this->viewData['content'] = ($page != 'index') ? Post::type('page')->slug($page)->first() : get_posts();
 
