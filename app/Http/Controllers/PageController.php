@@ -15,7 +15,6 @@ class PageController extends Controller
 
     private $viewData;
 
-    private $blogPage = 'blog';
 
     private function setMenu($menu = null) {
         if($menu == null)
@@ -29,7 +28,7 @@ class PageController extends Controller
         if(!empty($_GET['preview_id']))
             return $this->getPreview($_GET['preview_id']);
 
-        $this->viewData['content'] = ($page != 'index' || $page != $blogPage) ? Post::type('page')->slug($page)->first() : get_posts();
+        $this->viewData['content'] = ($page != 'index') ? Post::type('page')->slug($page)->first() : get_posts();
 
     	if (View::exists('pages.'.$page))
 			return view('pages.'.$page , $this->viewData);
@@ -39,8 +38,17 @@ class PageController extends Controller
 
     }
 
-    public function blog($slug) {
+    public function blog($slug = null) {
         $this->setMenu();
+
+        if(empty($slug)) {
+            $this->viewData['content'] = get_posts();
+
+            return view('pages.blog', $this->viewData);
+        }
+
+        if(!empty($_GET['preview_id']))
+            return $this->getPreview($_GET['preview_id']);
 
         $this->viewData['content'] = Post::type('post')->slug($slug)->first();
 
@@ -60,7 +68,9 @@ class PageController extends Controller
         $content = Post::where('ID', $ID)->with('revision')->first();
         $this->viewData['content'] =  $content->revision->last();
 
-    	return view('pages.post_page', $this->viewData);
+        if($content->type == 'post')
+    	   return view('pages.post', $this->viewData);
+    	else return view('pages.post_page', $this->viewData);
     }
 
 }
