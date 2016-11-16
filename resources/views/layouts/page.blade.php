@@ -35,7 +35,11 @@
                         <a href="/" class="menu__item-anchor" data-slug="home">
                             Home
                         </a>
-
+                    </li>
+                    <li class="menu__item">
+                        <a href="/blog" class="menu__item-anchor" data-slug="home">
+                            Blog
+                        </a>
                     </li>
                     @foreach ( $menu as $menuItem )
                         <li class="menu__item">

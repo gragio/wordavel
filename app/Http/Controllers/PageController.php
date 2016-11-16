@@ -33,7 +33,7 @@ class PageController extends Controller
     	if (View::exists('pages.'.$page))
 			return view('pages.'.$page , $this->viewData);
         else if (!empty($this->viewData['content']))
-            return view('pages.post_page', $this->viewData);
+            return view('pages.page', $this->viewData);
     	else return view('pages.404', $this->viewData);
 
     }
@@ -53,7 +53,7 @@ class PageController extends Controller
         $this->viewData['content'] = Post::type('post')->slug($slug)->first();
 
     	if (!empty($this->viewData['content']))
-            return view('pages.post', $this->viewData);
+            return view('pages.single', $this->viewData);
     	else return view('pages.404', $this->viewData);
     }
 
@@ -69,8 +69,8 @@ class PageController extends Controller
         $this->viewData['content'] =  $content->revision->last();
 
         if($content->type == 'post')
-    	   return view('pages.post', $this->viewData);
-    	else return view('pages.post_page', $this->viewData);
+    	   return view('pages.single', $this->viewData);
+    	else return view('pages.page', $this->viewData);
     }
 
 }
