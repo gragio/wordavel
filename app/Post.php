@@ -13,4 +13,8 @@ class Post extends Corcel
             return get_post_meta($this->ID);
         else return get_field($value, $this->ID);
     }
+
+    public function setMeta($key, $value) {
+        return update_post_meta($this->ID, $key, $value);
+    }
 }
