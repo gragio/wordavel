@@ -17,4 +17,8 @@ class Post extends Corcel
     public function setMeta($key, $value) {
         return update_post_meta($this->ID, $key, $value);
     }
+
+    public function setAcf($key, $value) {
+        return update_field($key, $value, $this->ID);
+    }
 }
