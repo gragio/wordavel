@@ -1,6 +1,6 @@
 # Wordavel
 
-Laravel PHP Framework v5.3 with [Corcel](https://github.com/corcel/corcel) and [ACF](https://github.com/corcel/acf) plugin.
+Laravel PHP Framework v5.3 with [Corcel](https://github.com/corcel/corcel) plugin.
 Configured and ready for WordPress use.
 
 ## Install
@@ -21,7 +21,7 @@ databases:
     - wordpress
 ```
 - Check your hosts file and add second virtual host for WP admin side.
-- Set values in your .env file for DB and WPDB connections.
+- Set values in your .env file for WP params. Generate your unique keys to [Roots.io](https://roots.io/salts.html)
 - If you move wordpress's directory, Set $bootstrapFilePath in app/Providers/WordPressServiceProvider.php
 - Run
 ```
