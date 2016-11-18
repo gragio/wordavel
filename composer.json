@@ -66,7 +66,8 @@
     "scripts": {
         "pre-install-cmd": "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
         "post-install-cmd": [
-            "php vendor/bin/homestead make"
+            "php vendor/bin/homestead make",
+            "composer apply-wp-config"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
@@ -77,7 +78,8 @@
             "php artisan key:generate",
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize"
-        ]
+        ],
+        "apply-wp-config": "echo \"<?php\nrequire_once(dirname(__DIR__) . '/wp-config.php');\nrequire_once(ABSPATH . 'wp-settings.php');\" > wordpress/wp-config.php"
     },
     "config": {
         "preferred-install": "dist"
