@@ -1,2 +1,3 @@
 wordpress/
-app/
+app/**
+!app/themes/wordavel
