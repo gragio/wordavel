@@ -1,3 +1,6 @@
 wordpress/
-app/**
+!app/
+app/*
+!app/themes
+app/themes/*
 !app/themes/wordavel
