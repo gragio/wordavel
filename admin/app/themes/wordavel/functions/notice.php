@@ -1,8 +1,8 @@
 <?php
-function html5blank_admin_notice__success() {
-    $notice = "<p><strong>Configure html5blank Themes!</strong></p>
+function wordavel_admin_notice__success() {
+    $notice = "<p><strong>Configure Wordavel Themes!</strong></p>
      <ul class='notice_conf'>
-        <li>Google Tag Manager, <a href='/wp-admin/customize.php'>click here</a></li>
+        <li>Google Tag Manager, <a href='customize.php'>click here</a></li>
      </ul>";
 
     ?>
@@ -17,4 +17,4 @@ function html5blank_admin_notice__success() {
     </div>
     <?php
 }
-add_action( 'admin_notices', 'html5blank_admin_notice__success' );
+add_action( 'admin_notices', 'wordavel_admin_notice__success' );
