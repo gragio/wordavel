@@ -77,6 +77,8 @@ $table_prefix  = env('WPDB_PREFIX');
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 define('WP_DEBUG', env('WP_DEBUG'));
+define('DISALLOW_FILE_MODS', true);
+define('DISALLOW_FILE_EDIT', true);
 
 /* That's all, stop editing! Happy blogging. */
 
