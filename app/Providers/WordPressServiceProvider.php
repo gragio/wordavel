@@ -7,7 +7,7 @@ use File;
 
 class WordPressServiceProvider extends ServiceProvider
 {
-    protected $bootstrapFilePath = __DIR__.'/../../wordpress/wp-load.php';
+    protected $bootstrapFilePath = __DIR__.'/../../admin/wordpress/wp-load.php';
     /**
      * Bootstrap the application services.
      *

@@ -7,6 +7,9 @@ $dotenv = new Dotenv\Dotenv(__DIR__);
 if (file_exists(__DIR__ . '/.env'))
     $dotenv->load();
 
+
+define('WP_CONTENT_DIR',  __DIR__.'/admin/app');
+
 /*------------------------------------------------------------------*/
 
 // ** MySQL settings - You can get this info from your web host ** //
@@ -48,6 +51,7 @@ define('LOGGED_IN_SALT', env('LOGGED_IN_SALT'));
 define('NONCE_SALT', env('NONCE_SALT'));
 define('COOKIE_DOMAIN', env('APP_DOMAIN'));
 define('WP_HOME', env('APP_URL'));
+define('WP_SITEURL', env('WP_SITEURL'));
 
 /**#@-*/
 
@@ -77,4 +81,4 @@ define('WP_DEBUG', env('WP_DEBUG'));
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__DIR__) . '/wordpress/');
+	define('ABSPATH', dirname(__DIR__) . '/admin/wordpress/');
