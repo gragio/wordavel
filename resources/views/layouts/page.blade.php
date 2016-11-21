@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        <title>Wordavel @if(isset($content['title'])) | {{$content['title']}} @endif</title>
+        <title>{{get_bloginfo('name')}} @if(isset($content['title'])) | {{$content['title']}} @endif</title>
 
         <meta content='width=device-width,initial-scale=1' name='viewport'>
         <meta charset="UTF-8">
