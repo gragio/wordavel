@@ -1,2 +1,0 @@
-<?php
-// Add Theme Stylesheet
