@@ -80,6 +80,9 @@ define('WP_DEBUG', env('WP_DEBUG'));
 define('DISALLOW_FILE_MODS', true);
 define('DISALLOW_FILE_EDIT', true);
 
+define('DBI_AWS_ACCESS_KEY_ID', env('S3_KEY'));
+define('DBI_AWS_SECRET_ACCESS_KEY', env('S3_SECRET'));
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
