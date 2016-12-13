@@ -9,7 +9,7 @@ if (file_exists(__DIR__ . '/.env'))
 
 
 define('WP_CONTENT_DIR',  __DIR__.'/admin/app');
-define('WP_CONTENT_URL', 'http://admin.'.env('APP_DOMAIN').'/app');
+define('WP_CONTENT_URL', env('WP_APP'));
 
 /*------------------------------------------------------------------*/
 
