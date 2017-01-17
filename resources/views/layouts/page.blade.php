@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        <title>{{get_bloginfo('name')}} @if(isset($content['title'])) | {{$content['title']}} @endif</title>
+        <title>{{get_bloginfo('name')}}@yield('title')</title>
 
         <meta content='width=device-width,initial-scale=1' name='viewport'>
         <meta charset="UTF-8">
@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <head>
+    </head>
     <body>
 
 

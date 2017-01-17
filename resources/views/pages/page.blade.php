@@ -1,5 +1,6 @@
 @extends('layouts.page')
 
+@section('title', ' - '.$content['title'])
 
 @section('main')
 
