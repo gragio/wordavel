@@ -14,9 +14,7 @@
         <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+        <link rel="stylesheet" type="text/css" href="./css/app.css">
     </head>
     <body>
 
@@ -70,6 +68,8 @@
         </footer>
 
         @yield('page-scripts')
+
+        <script type="text/javascript" src="./js/app.js"></script>
 
         @if( env('APP_ENV') === 'local' )
 
