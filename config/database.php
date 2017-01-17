@@ -74,7 +74,7 @@ return [
             'password'  => env('WPDB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => 'wp_',
+            'prefix'    => env('WPDB_PREFIX', ''),
             'strict'    => false,
             'engine'    => null,
         ],
