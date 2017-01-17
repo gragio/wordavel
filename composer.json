@@ -71,16 +71,25 @@
             "rm -rf admin/wordpress/wp-content"
         ],
         "post-update-cmd": [
+            "rm -rf admin/wordpress/wp-content",
+            "composer apply-wp-config",            
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ],
         "start": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "php artisan key:generate",
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize"
         ],
-        "apply-wp-config": "echo \"<?php\nrequire_once(dirname(__DIR__) . '/../wp-config.php');\nrequire_once(ABSPATH . 'wp-settings.php');\" > admin/wordpress/wp-config.php"
+        "apply-wp-config": "echo \"<?php\nrequire_once(dirname(__DIR__) . '/../wp-config.php');\nrequire_once(ABSPATH . 'wp-settings.php');\" > admin/wordpress/wp-config.php",
+        "deploy": [
+            "composer apply-wp-config",
+            "rm -rf admin/wordpress/wp-content",
+            "php artisan key:generate",
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan migrate",
+            "php artisan optimize"
+        ]
     },
     "config": {
         "preferred-install": "dist"
