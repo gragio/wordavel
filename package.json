@@ -13,8 +13,5 @@
     "laravel-elixir-browsersync-official": "^1.0.0",
     "laravel-elixir-imagemin": "^0.2.3",
     "laravel-elixir-webpack-official": "^1.0.2"
-  },
-  "dependencies": {
-    
   }
 }
