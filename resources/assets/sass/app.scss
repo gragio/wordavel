@@ -7,3 +7,28 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.debug {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	border: 2px solid #333;
+	background-color: white;
+	z-index: 999;
+
+	opacity: .4;
+
+	overflow-y: scroll;
+	max-height: 600px;
+
+	transform: translateY(90%);
+	transition: all .3s ease;
+
+    &:hover {
+        transform: translateY(0);
+		opacity: 1;
+    }
+}

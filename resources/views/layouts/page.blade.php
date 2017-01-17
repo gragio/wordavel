@@ -71,5 +71,15 @@
 
         @yield('page-scripts')
 
+        @if( env('APP_ENV') === 'local' )
+
+            <div class="debug">
+
+                {{ dd(get_defined_vars()['__data']) }}
+
+            </div>
+
+        @endif
+
     </body>
 </html>
