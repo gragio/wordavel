@@ -1,6 +1,6 @@
 const elixir = require('laravel-elixir');
-
-require('laravel-elixir-vue-2');
+require('laravel-elixir-imagemin');
+dotenv = require('dotenv').config();
 
 /*
  |--------------------------------------------------------------------------
@@ -16,4 +16,14 @@ require('laravel-elixir-vue-2');
 elixir(mix => {
     mix.sass('app.scss')
        .webpack('app.js');
+});
+
+elixir(function(mix) {
+  mix.browserSync({
+    proxy: process.env.APP_DOMAIN
+  });
+});
+
+elixir(function(mix) {
+   mix.imagemin();
 });
