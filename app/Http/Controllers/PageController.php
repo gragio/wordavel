@@ -34,7 +34,7 @@ class PageController extends Controller
 			return view('pages.'.$page , $this->viewData);
         else if (!empty($this->viewData['content']))
             return view('pages.page', $this->viewData);
-    	else return view('pages.404', $this->viewData);
+    	else return abort(404);
 
     }
 
@@ -54,13 +54,13 @@ class PageController extends Controller
 
     	if (!empty($this->viewData['content']))
             return view('pages.single', $this->viewData);
-    	else return view('pages.404', $this->viewData);
+    	else return abort(404);
     }
 
     private function getPreview($ID) {
 
         if(!is_user_logged_in() && $user = wp_get_current_user() || !array_intersect(['editor', 'administrator', 'author'], $user->roles))
-            return view('pages.404', $this->viewData);
+            return abort(404);
 
 
         $content = Post::where('ID', $ID)->with('revision')->first();
