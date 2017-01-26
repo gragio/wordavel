@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        <title>{{get_bloginfo('name')}}@yield('title')</title>
+        <title>@yield('title'){{get_bloginfo('name')}}</title>
 
         <meta content='width=device-width,initial-scale=1' name='viewport'>
         <meta charset="UTF-8">
@@ -39,9 +39,9 @@
                             Blog
                         </a>
                     </li>
-                    @foreach ( $menu as $menuItem )
+                    @foreach ( Post::type('page')->published()->get() as $menuItem )
                         <li class="menu__item">
-                            <a href="/{{ $menuItem['slug'] }}" class="menu__item-anchor @if( $slug == $menuItem['slug']) active @endif " data-slug="{{ $menuItem['slug'] }}">
+                            <a href="/{{ $menuItem['slug'] }}" class="menu__item-anchor @if( $content->slug == $menuItem['slug']) active @endif " data-slug="{{ $menuItem['slug'] }}">
                                 {{ $menuItem['title'] }}
                             </a>
                         </li>

@@ -13,48 +13,57 @@ use App\Menu;
 class PageController extends Controller
 {
 
-    private $viewData;
+    private $viewData = [];
+
+    private $template = null;
 
 
-    private function setMenu($menu = null) {
-        if($menu == null)
-            $this->viewData['menu'] = Post::type('page')->published()->get();
-        else $this->viewData['menu'] = $menu;
-    }
-
-    public function page($page = 'index') {
-        $this->setMenu();
+    public function page($page = null) {
 
         if(!empty($_GET['preview_id']) || !empty($_GET['page_id']) || !empty($_GET['p']))
             return $this->getPreview($_GET['preview_id'].$_GET['p'].$_GET['page_id']);
 
-        $this->viewData['content'] = ($page != 'index') ? Post::type('page')->slug($page)->first() : get_posts();
+        // case index
+        if(empty($page)) {
+            $homeID = get_option('page_on_front');
+            if(is_int($homeID)) {
+                $this->viewData['content'] = Post::where('ID', $homeID)->first();
+                $this->viewData['meta'] = $this->viewData['content']->getMeta();
+            }
+            return view('pages.index', $this->viewData);
+        }
 
-    	if (View::exists('pages.'.$page))
-			return view('pages.'.$page , $this->viewData);
-        else if (!empty($this->viewData['content']))
-            return view('pages.page', $this->viewData);
-    	else return abort(404);
+
+        $this->viewData['content'] = Post::type('page')->slug($page)->published()->first();
+
+        if($this->viewData['content']->name != $page) {
+            header( "HTTP/1.1 301 Moved Permanently" );
+            header( "location: ".get_permalink($this->viewData['content']));
+        }
+        //$this->setPost($this->viewData['content']);
+        if($this->viewData['content'] instanceof Post) {
+            $this->viewData['meta'] = $this->viewData['content']->getMeta();
+            $this->template = $this->viewData['content']->template();
+        }
+
+        return $this->render($page);
 
     }
 
     public function blog($slug = null) {
-        $this->setMenu();
 
         if(empty($slug)) {
-            $this->viewData['content'] = get_posts();
-
+            $this->viewData['content'] = Post::type('post')->slug($slug)->first();
             return view('pages.blog', $this->viewData);
         }
 
         if(!empty($_GET['preview_id']))
             return $this->getPreview($_GET['preview_id']);
 
-        $this->viewData['content'] = Post::type('post')->slug($slug)->first();
+        $this->viewData['content'] = Post::type('post')->slug($slug)->published()->first();
+        $this->viewData['meta'] = $this->viewData['content']->getMeta();
 
-    	if (!empty($this->viewData['content']))
-            return view('pages.single', $this->viewData);
-    	else return abort(404);
+    	return $this->render($page);
     }
 
     private function getPreview($ID) {
@@ -69,6 +78,22 @@ class PageController extends Controller
         if($content->type == 'post')
     	   return view('pages.single', $this->viewData);
     	else return view('pages.page', $this->viewData);
+    }
+
+    private function render($page = null) {
+
+        if(!empty($this->template) && View::exists('pages.'.$this->template)) {
+            return view('pages.'.$this->template , $this->viewData);
+        } else if (!empty($this->viewData['content'])) {
+
+            if($this->viewData['content']->post_type == 'page') {
+                return view('pages.page', $this->viewData);
+            } else {
+                return view('pages.index', $this->viewData);
+            }
+
+        } else return abort(404);
+
     }
 
 }
