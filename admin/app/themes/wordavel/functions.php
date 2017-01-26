@@ -138,9 +138,8 @@ function template($location, $name = null) {
 	Functions
 \*------------------------------------*/
 
-function html5blank_nav() {
-	wp_nav_menu(
-	array(
+function wordavel_nav() {
+	wp_nav_menu([
 		'theme_location'  => 'header-menu',
 		'menu'            => '',
 		'container'       => 'div',
@@ -157,8 +156,7 @@ function html5blank_nav() {
 		'items_wrap'      => '<ul>%3$s</ul>',
 		'depth'           => 0,
 		'walker'          => ''
-		)
-	);
+	]);
 }
 
 // Register HTML5 Blank Navigation
@@ -171,15 +169,13 @@ function register_html5_menu() {
 }
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
-function my_wp_nav_menu_args($args = '')
-{
+function my_wp_nav_menu_args($args = '') {
     $args['container'] = false;
     return $args;
 }
 
 // Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-function html5wp_pagination()
-{
+function html5wp_pagination() {
     global $wp_query;
     $big = 999999999;
     echo paginate_links(array(
@@ -192,8 +188,7 @@ function html5wp_pagination()
 
 
 // Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
-function html5wp_custom_post($length)
-{
+function html5wp_custom_post($length) {
     return 40;
 }
 
@@ -215,6 +210,17 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 }
 
 
+function remove_wp_logo() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');
+}
+
+function cc_mime_types($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+
+
 
 /*------------------------------------*\
 	Actions + Filters + ShortCodes
@@ -222,6 +228,7 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 
 // Add Actions
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
+add_action('wp_before_admin_bar_render', 'remove_wp_logo');
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -245,6 +252,7 @@ add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Si
 add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
+add_filter('upload_mimes', 'cc_mime_types');
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
