@@ -6,9 +6,9 @@
 	<div align="center" class="clearfix">
 		Welcome to Wordavel
 	</div>
-	@foreach ( Post::type('post')->published()->get() as $article )
+	@foreach ( App\Post::type('post')->published()->get() as $article )
 	<div>
-		<a href="{{get_permalink($article->IS)}}"><h2>{{$article->title}}</h2></a>
+		<a href="{{$article->link()}}"><h2>{{$article->title}}</h2></a>
 		<p>{{$article->content}}</p>
 	</div>
 	@endforeach

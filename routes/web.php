@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('testme', 'PostController@index');
 
-Route::get('blog/{slug?}', 'PageController@blog');
+Route::get('blog/{slug?}', 'PostController@post');
 
 Route::get('{page?}', 'PageController@page');
