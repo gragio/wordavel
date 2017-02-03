@@ -27,8 +27,9 @@ class PageController extends Controller
             header( "location: ".$viewData['obj']->link() );
         }
 
-        if($viewData['obj'] instanceof Page)
+        if(env('APP_ENV') == 'local' && $viewData['obj'] instanceof Page) {
             $viewData['meta'] = $viewData['obj']->getMeta();
+        }
 
         if(!empty($_GET['preview_id']))
             return ViewUtility::getPreview($viewData);
@@ -43,8 +44,12 @@ class PageController extends Controller
         $homeID = get_option('page_on_front');
 
         if(!empty($homeID)) {
+            
             $viewData['obj'] = Page::where('ID', $homeID)->first();
-            $viewData['meta'] = $viewData['obj']->getMeta();
+
+            if(env('APP_ENV') == 'local') {
+                $viewData['meta'] = $viewData['obj']->getMeta();
+            }
 
             if(!empty($_GET['preview_id']))
                 return ViewUtility::getPreview($viewData);

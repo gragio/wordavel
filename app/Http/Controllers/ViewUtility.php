@@ -16,13 +16,21 @@ class ViewUtility extends Controller
     }
 
     public static function render($viewData) {
-        $template = $viewData['obj']->template();
 
-        if(!empty($template) && View::exists('pages.'.$template)) {
-            return view('pages.'.$template , $viewData);
-        } else if (!empty($viewData['obj'])) {
+
+        if (!empty($viewData['obj'])) {
+
+            $template = $viewData['obj']->template();
+
+            if(!empty($template) && View::exists('pages.'.$template))
+                return view('pages.'.$template , $viewData);
+
+        }
+
+        if(!empty($viewData['view']))
             return view($viewData['view'], $viewData);
-        } else return abort(404);
+
+        return abort(404);
 
     }
 }
