@@ -13,7 +13,7 @@
           "type": "package",
           "package": {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.4.8",
+            "version": "5.5.5",
             "type": "wordpress-plugin",
             "dist": {
                 "type": "zip",
@@ -41,7 +41,7 @@
         "wpackagist-plugin/amazon-web-services": "^1.0",
         "wpackagist-plugin/wordpress-seo": "^3.8",
         "wpackagist-plugin/regenerate-thumbnails": "^2.2",
-        "advanced-custom-fields/advanced-custom-fields-pro": "^5.4"
+        "advanced-custom-fields/advanced-custom-fields-pro": "^5.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
