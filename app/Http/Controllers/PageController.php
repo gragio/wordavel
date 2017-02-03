@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Services;
-use App\Post;
 use App\Page;
 
 class PageController extends Controller
@@ -17,18 +16,8 @@ class PageController extends Controller
 
         $viewData = [];
 
-        if(!empty($_GET['preview_id']) || !empty($_GET['page_id']) || !empty($_GET['p']))
-            return $this->getPreview($_GET['preview_id'].$_GET['p'].$_GET['page_id']);
-
-        // case index
-        if(empty($page)) {
-            $homeID = get_option('page_on_front');
-            if(!empty($homeID)) {
-                $viewData['obj'] = Page::where('ID', $homeID)->first();
-                $viewData['meta'] = $viewData['obj']->getMeta();
-            }
-            return view('pages.index', $viewData);
-        }
+        if(empty($page))
+            return $this->index();
 
         $viewData['obj'] = Page::slug($page)->published()->first();
         $viewData['view'] = 'pages.page';
@@ -37,14 +26,32 @@ class PageController extends Controller
             header( "HTTP/1.1 301 Moved Permanently" );
             header( "location: ".$viewData['obj']->link() );
         }
-        //$setPost($viewData['obj']);
-        if($viewData['obj'] instanceof Page) {
+
+        if($viewData['obj'] instanceof Page)
             $viewData['meta'] = $viewData['obj']->getMeta();
-            $template = $viewData['obj']->template();
-        }
+
+        if(!empty($_GET['preview_id']))
+            return ViewUtility::getPreview($viewData);
 
         return ViewUtility::render($viewData);
 
+    }
+
+    private function index() {
+
+        $viewData = ['view' => 'pages.index'];
+        $homeID = get_option('page_on_front');
+
+        if(!empty($homeID)) {
+            $viewData['obj'] = Page::where('ID', $homeID)->first();
+            $viewData['meta'] = $viewData['obj']->getMeta();
+
+            if(!empty($_GET['preview_id']))
+                return ViewUtility::getPreview($viewData);
+
+        }
+
+        return ViewUtility::render($viewData);
     }
 
 }
