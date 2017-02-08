@@ -15,8 +15,12 @@ class PostController extends Controller
             return view('pages.blog', $viewData);
         }
 
-        $viewData['view'] = 'pages.single';
         $viewData['obj'] = Post::type('post')->slug($slug)->published()->first();
+
+        if(!empty($viewData['obj']))
+            return abort(404);
+        
+        $viewData['view'] = 'pages.single';
 
         if(env('APP_ENV') == 'local') {
             $viewData['meta'] = $viewData['obj']->getMeta();

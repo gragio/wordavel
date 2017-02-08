@@ -20,6 +20,10 @@ class PageController extends Controller
             return $this->index();
 
         $viewData['obj'] = Page::slug($page)->published()->first();
+
+        if(empty($viewData['obj']))
+            return abort(404);
+
         $viewData['view'] = 'pages.page';
 
         if($viewData['obj']->slug != $page) {
@@ -44,7 +48,7 @@ class PageController extends Controller
         $homeID = get_option('page_on_front');
 
         if(!empty($homeID)) {
-            
+
             $viewData['obj'] = Page::where('ID', $homeID)->first();
 
             if(env('APP_ENV') == 'local') {
