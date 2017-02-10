@@ -159,13 +159,13 @@ function wordavel_nav() {
 	]);
 }
 
-// Register HTML5 Blank Navigation
-function register_html5_menu() {
-    register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu'  => __('Header Menu', 'html5blank'), // Main Navigation
-        'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
-        'extra-menu'   => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
-    ));
+function register_menu() {
+
+    register_nav_menus([ // Using array to specify more menus if needed
+        'header-menu'  => __('Header Menu', 'header-menu'), // Main Navigation
+        'sidebar-menu' => __('Sidebar Menu', 'sidebar-menu'), // Sidebar Navigation
+        'extra-menu'   => __('Extra Menu', 'extra-menu') // Extra Navigation if needed (duplicate as many as you need!)
+    ]);
 }
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
@@ -215,9 +215,36 @@ function remove_wp_logo() {
 	$wp_admin_bar->remove_menu('wp-logo');
 }
 
-function cc_mime_types($mimes) {
-    $mimes['svg'] = 'image/svg+xml';
-    return $mimes;
+// Allow SVG
+add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
+
+  global $wp_version;
+  if ( $wp_version !== '4.7.1' ) {
+     return $data;
+  }
+
+  $filetype = wp_check_filetype( $filename, $mimes );
+
+  return [
+      'ext'             => $filetype['ext'],
+      'type'            => $filetype['type'],
+      'proper_filename' => $data['proper_filename']
+  ];
+
+}, 10, 4 );
+
+function cc_mime_types( $mimes ){
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+
+function fix_svg() {
+  echo '<style type="text/css">
+        .attachment-266x266, .thumbnail img {
+             width: 100% !important;
+             height: auto !important;
+        }
+        </style>';
 }
 
 
@@ -229,6 +256,8 @@ function cc_mime_types($mimes) {
 // Add Actions
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 add_action('wp_before_admin_bar_render', 'remove_wp_logo');
+add_action('admin_head', 'fix_svg');
+add_action('init', 'register_menu');
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -256,6 +285,7 @@ add_filter('upload_mimes', 'cc_mime_types');
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
+
 
 // Class For plugin Require
 require_once get_template_directory() . '/functions/class-tgm-plugin-activation.php';
