@@ -1,7 +1,7 @@
 <?php
 /*
- *  Author: Alkemy
- *  URL: alkemy.com
+ *  Author: Giorgio Grasso <@gragio>
+ *  URL: grag.io
  *  Custom functions, support, custom post types and more.
  */
 

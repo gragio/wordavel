@@ -8,10 +8,14 @@ class Post extends Corcel
 {
     protected $connection = 'wordpress';
 
-    public function acf($key = '') {
-        if(empty($key))
+    protected $postType = 'post';
+
+    public function acf(string $key = null) {
+        if($key === null) {
             return get_post_meta($this->ID);
-        else return get_field($key, $this->ID);
+        }
+
+        return get_field($key, $this->ID);
     }
 
     public function setMeta($key, $value) {

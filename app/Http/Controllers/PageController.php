@@ -15,7 +15,6 @@ class PageController extends Controller
 
     private $viewData;
 
-
     private function setMenu($menu = null) {
         if($menu == null)
             $this->viewData['menu'] = Post::type('page')->published()->get();
