@@ -6,10 +6,10 @@
 	<div align="center" class="clearfix">
 		Welcome to Wordavel
 	</div>
-	@foreach ( $content as $article )
+	@foreach ( App\Post::type('post')->published()->get() as $article )
 	<div>
-		<a href="{{get_permalink($article)}}"><h2>{{$article->post_title}}</h2></a>
-		<p>{{$article->post_content}}</p>
+		<a href="{{$article->link()}}"><h2>{{$article->title}}</h2></a>
+		<p>{{$article->content}}</p>
 	</div>
 	@endforeach
 

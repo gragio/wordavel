@@ -138,9 +138,8 @@ function template($location, $name = null) {
 	Functions
 \*------------------------------------*/
 
-function html5blank_nav() {
-	wp_nav_menu(
-	array(
+function wordavel_nav() {
+	wp_nav_menu([
 		'theme_location'  => 'header-menu',
 		'menu'            => '',
 		'container'       => 'div',
@@ -157,29 +156,26 @@ function html5blank_nav() {
 		'items_wrap'      => '<ul>%3$s</ul>',
 		'depth'           => 0,
 		'walker'          => ''
-		)
-	);
+	]);
 }
 
-// Register HTML5 Blank Navigation
-function register_html5_menu() {
-    register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu'  => __('Header Menu', 'html5blank'), // Main Navigation
-        'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
-        'extra-menu'   => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
-    ));
+function register_menu() {
+
+    register_nav_menus([ // Using array to specify more menus if needed
+        'header-menu'  => __('Header Menu', 'header-menu'), // Main Navigation
+        'sidebar-menu' => __('Sidebar Menu', 'sidebar-menu'), // Sidebar Navigation
+        'extra-menu'   => __('Extra Menu', 'extra-menu') // Extra Navigation if needed (duplicate as many as you need!)
+    ]);
 }
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
-function my_wp_nav_menu_args($args = '')
-{
+function my_wp_nav_menu_args($args = '') {
     $args['container'] = false;
     return $args;
 }
 
 // Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-function html5wp_pagination()
-{
+function html5wp_pagination() {
     global $wp_query;
     $big = 999999999;
     echo paginate_links(array(
@@ -192,8 +188,7 @@ function html5wp_pagination()
 
 
 // Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
-function html5wp_custom_post($length)
-{
+function html5wp_custom_post($length) {
     return 40;
 }
 
@@ -215,6 +210,44 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 }
 
 
+function remove_wp_logo() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');
+}
+
+// Allow SVG
+add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
+
+  global $wp_version;
+  if ( $wp_version !== '4.7.1' ) {
+     return $data;
+  }
+
+  $filetype = wp_check_filetype( $filename, $mimes );
+
+  return [
+      'ext'             => $filetype['ext'],
+      'type'            => $filetype['type'],
+      'proper_filename' => $data['proper_filename']
+  ];
+
+}, 10, 4 );
+
+function cc_mime_types( $mimes ){
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+
+function fix_svg() {
+  echo '<style type="text/css">
+        .attachment-266x266, .thumbnail img {
+             width: 100% !important;
+             height: auto !important;
+        }
+        </style>';
+}
+
+
 
 /*------------------------------------*\
 	Actions + Filters + ShortCodes
@@ -222,6 +255,9 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 
 // Add Actions
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
+add_action('wp_before_admin_bar_render', 'remove_wp_logo');
+add_action('admin_head', 'fix_svg');
+add_action('init', 'register_menu');
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -245,9 +281,11 @@ add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Si
 add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
+add_filter('upload_mimes', 'cc_mime_types');
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
+
 
 // Class For plugin Require
 require_once get_template_directory() . '/functions/class-tgm-plugin-activation.php';
