@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Services;
 use App\Post;
-use App\Menu;
+use App\Page;
 
 class PageController extends Controller
 {
@@ -23,6 +23,8 @@ class PageController extends Controller
 
     public function page($page = 'index') {
         $this->setMenu();
+
+        $viewData = [];
 
         if(!empty($_GET['preview_id']) || !empty($_GET['page_id']) || !empty($_GET['p']))
             return $this->getPreview($_GET['preview_id'].$_GET['p'].$_GET['page_id']);

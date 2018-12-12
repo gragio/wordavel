@@ -7,7 +7,7 @@ use App\Post;
 
 class PostController extends Controller
 {
-    public function post($slug = null) {
+    public function post(string $slug = null) {
         $viewData = [];
 
         if(empty($slug)) {
@@ -17,9 +17,9 @@ class PostController extends Controller
 
         $viewData['obj'] = Post::type('post')->slug($slug)->published()->first();
 
-        if(!empty($viewData['obj']))
+        if(empty($viewData['obj']))
             return abort(404);
-        
+
         $viewData['view'] = 'pages.single';
 
         if(env('APP_ENV') == 'local') {

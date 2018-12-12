@@ -72,13 +72,9 @@
         <script type="text/javascript" src="/js/app.js"></script>
 
         @if( env('APP_ENV') === 'local' )
-
             <div class="debug">
-
                 {{ dump(get_defined_vars()['__data']) }}
-
             </div>
-
         @endif
 
     </body>

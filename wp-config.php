@@ -79,6 +79,7 @@ $table_prefix  = env('WPDB_PREFIX');
 define('WP_DEBUG', env('WP_DEBUG'));
 define('DISALLOW_FILE_MODS', true);
 define('DISALLOW_FILE_EDIT', true);
+define('WP_DEFAULT_THEME', 'Wordavel');
 
 define('DBI_AWS_ACCESS_KEY_ID', env('S3_KEY'));
 define('DBI_AWS_SECRET_ACCESS_KEY', env('S3_SECRET'));

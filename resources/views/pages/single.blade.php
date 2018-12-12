@@ -1,16 +1,16 @@
 @extends('layouts.page')
 
-@section('title', ' - '.$content['title'])
+@section('title', ' - '.$obj['title'])
 
 @section('main')
 
 	<div align="center" class="clearfix">
-		<h1>{{$content->title}}</h1>
-		<p style="margin-top: -20px" >{{$content->post_date}} - {{$content->author->user_nicename}}</p>
-		{!!$content->content!!}
+		<h1>{{$obj->title}}</h1>
+		<p style="margin-top: -20px" >{{$obj->post_date}} - {{$obj->author->user_nicename}}</p>
+		{!!$obj->content!!}
 	</div>
 
-	@if ($comments = $content->comments)
+	@if ($comments = $obj->comments)
 		@foreach ($comments as $comment)
 			<div>
 				<h4>{{$comment->comment_author}}</h4>
