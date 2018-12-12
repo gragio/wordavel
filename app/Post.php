@@ -8,27 +8,17 @@ class Post extends Corcel
 {
     protected $connection = 'wordpress';
 
-<<<<<<< HEAD
     /**
      * Get specific ACF field or an array with all fields
      *
      * @param string $key
      * @return array|string|bool|object field for specific $key
      */
-    public function getAcf($key = null) {
-        if(empty($key))
+    public function getAcf(string $key = null) {
+        if ($key !== null)
             return get_fields($this->ID);
-        else return get_field($key, $this->ID);
-=======
-    protected $postType = 'post';
-
-    public function acf(string $key = null) {
-        if($key === null) {
-            return get_post_meta($this->ID);
-        }
 
         return get_field($key, $this->ID);
->>>>>>> 18f2abd4ff48186f70bcc87cc9dd7918ea2d8ae2
     }
 
     /**
