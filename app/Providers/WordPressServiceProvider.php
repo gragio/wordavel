@@ -25,7 +25,7 @@ class WordPressServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if(File::exists($this->bootstrapFilePath)) {
+        if (File::exists($this->bootstrapFilePath)) {
             require_once $this->bootstrapFilePath;
         } else throw new \RuntimeException('WordPress Bootstrap file not found!');
     }

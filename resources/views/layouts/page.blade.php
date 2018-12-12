@@ -64,7 +64,7 @@
         <!-- /.main -->
 
         <footer>
-            <p align="center">Develop by Alkemy Dev</p>
+            <p align="center">Develop by Gragio</p>
         </footer>
 
         @yield('page-scripts')
@@ -75,7 +75,7 @@
 
             <div class="debug">
 
-                {{ dd(get_defined_vars()['__data']) }}
+                {{ dump(get_defined_vars()['__data']) }}
 
             </div>
 

@@ -8,7 +8,7 @@ Configured and ready for WordPress use.
 ```
 $ composer install
 ```
-- Set your Homestead.yaml file and define sites and databases. For example:
+- Set your `Homestead.yaml` file and define sites and databases. For example:
 ```
 sites:
     - map: wordavel.dev
@@ -22,7 +22,7 @@ databases:
 ```
 - Check your hosts file and add second virtual host for WP admin side.
 - Set values in your .env file for WP params. Generate your unique keys to [Roots.io](https://roots.io/salts.html)
-- If you move wordpress's directory, Set $bootstrapFilePath in app/Providers/WordPressServiceProvider.php
+- If you move wordpress's directory, set `$bootstrapFilePath` in `app/Providers/WordPressServiceProvider.php`
 - Run
 ```
 $ vagrant up
@@ -34,4 +34,7 @@ $ composer start
 - Try your test page /testme. http://wordavel.dev/testme in this case.
 
 ## Authors
-- [Giorgio Grasso](http://giorgiograsso.com)
+- [Giorgio Grasso](https://grag.io)
+
+## Contributors
+- [Gianmarco Simone](https://github.com/gsimone)
